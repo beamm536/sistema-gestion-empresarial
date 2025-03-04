@@ -1,5 +1,5 @@
 <script>
-    export let icon = "";
+    export let img;
     export let label = "";
   </script>
   
@@ -9,14 +9,15 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      width: 70px;
-      height: 70px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       background: #f5a623;
       color: white;
       font-size: 14px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       transition: transform 0.2s;
+      
     }
     .icon-button:hover {
       transform: scale(1.1);
@@ -28,7 +29,10 @@
   </style>
   
   <div class="icon-button">
-    <div class="icon">{icon}</div> <!-- prop -> para la img -->
+    <div class="icon">
+        <img src={img} alt={label} width="50" height="50" />
+    </div> <!-- prop -> para la img -->
+    
     <span>{label}</span> <!-- prop -> para el texto -->
   </div>
   
