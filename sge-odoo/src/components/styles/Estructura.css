@@ -1,0 +1,22 @@
+    .launcher {
+      /* position: relative;
+      width: auto;
+      height: auto;
+      background-color: #eb2323;
+      display: flex;
+      align-items: center;
+      justify-content: center; */
+      max-width: 100vw;
+      max-height: 100vh;
+      overflow: hidden;
+    } 
+  
+    .icons-container {
+      overflow: hidden;
+    }
+  
+    .icon-wrapper {
+      position: absolute;
+      transform: translate(-50%, -50%);
+    }
+  
