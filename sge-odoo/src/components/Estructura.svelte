@@ -1,6 +1,7 @@
 <script>
     import IconoBoton from "./IconoBoton.svelte";
     import './styles/Estructura.css'
+
     /* import imgFacturacion from "../../public/imgs/facturacion.png"
     import imgVentas from "../../public/imgs/ventas.png"
     import imgContabilidad from "../../public/imgs/contabilidad.png"
@@ -22,8 +23,9 @@
   { img: "/imgs/inventario.png", label: "Inventario" },
   { img: "/imgs/compra.png", label: "Compra" },
   { img: "/imgs/documentos.png", label: "Documentos" },
-  { img: "/imgs/empleados.png", label: "Empleados" }
+  { img: "/imgs/empleados.png", label: "Empleados"}
 ];
+
   </script>
     
 <!-- PARA LA POSICION DE LOS ICONOS -->
