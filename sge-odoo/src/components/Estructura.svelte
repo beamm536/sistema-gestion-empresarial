@@ -1,5 +1,6 @@
 <script>
     import IconoBoton from "./IconoBoton.svelte";
+    import './styles/Estructura.css'
     /* import imgFacturacion from "../../public/imgs/facturacion.png"
     import imgVentas from "../../public/imgs/ventas.png"
     import imgContabilidad from "../../public/imgs/contabilidad.png"
@@ -21,39 +22,17 @@
   { img: "/imgs/inventario.png", label: "Inventario" },
   { img: "/imgs/compra.png", label: "Compra" },
   { img: "/imgs/documentos.png", label: "Documentos" },
-  { img: "/imgs/fabricacion.png", label: "Fabricacion" }
+  { img: "/imgs/empleados.png", label: "Empleados" }
 ];
   </script>
-  
-  <style>
-    .launcher {
-      position: relative;
-      width: 300px;
-      height: 300px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #fff;
-    }
-  
-    .icons-container {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-    }
-  
-    .icon-wrapper {
-      position: absolute;
-      transform: translate(-50%, -50%);
-    }
-  </style>
-  
+    
+<!-- PARA LA POSICION DE LOS ICONOS -->
   <div class="launcher">
     <div class="icons-container">
       {#each imgs as { img, label }, i}
         <div
           class="icon-wrapper"
-          style="transform: translate(-50%, -50%) rotate({i * (360 / imgs.length)}deg) translate(200px) rotate(-{i * (360 / imgs.length)}deg);"
+          style="transform: translate(-50%, -50%) rotate({i * (360 / imgs.length)}deg) translate(270px) rotate(-{i * (360 / imgs.length)}deg);"
         >
           <IconoBoton {img} {label} />
         </div>
