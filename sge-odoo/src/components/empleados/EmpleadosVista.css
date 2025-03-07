@@ -1,4 +1,4 @@
-    .app-empleados {
+    /* .app-empleados {
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -126,4 +126,139 @@
       border-radius: 50%;
       background: green;
       margin-left: auto;
+    } */
+
+    .app-empleados {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
+    
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f8f9fa;
+      padding: 10px 20px;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    .navbar .menu {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .navbar .menu a {
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 5px 10px;
+    }
+    
+    .navbar .menu a:hover {
+      background: #e9ecef;
+      border-radius: 5px;
+    }
+    
+    .app-content {
+      display: flex;
+      flex: 1;
+      min-height: 0;
+    }
+    
+    .sidebar {
+      width: 250px;
+      background: #f8f9fa;
+      padding: 20px;
+      border-right: 1px solid #ddd;
+    }
+    
+    .sidebar h3 {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 10px;
+    }
+    
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .sidebar li {
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 14px;
+      border-radius: 5px;
+    }
+    
+    .sidebar li:hover,
+    .sidebar li strong {
+      background: #e9ecef;
+    }
+    
+    .sidebar li.selected {
+      background-color: #007bff;
+      color: white;
+    }
+    
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .search-bar {
+      width: 100%;
+      max-width: 300px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    
+    .empleados {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    
+    .empleado-card {
+      display: flex;
+      align-items: center;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 12px;
+      width: 300px;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .icon {
+      width: 50px;
+      height: 50px;
+      background: goldenrod;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-weight: bold;
+      font-size: 18px;
+      margin-right: 10px;
+    }
+    
+    .status {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: green;
+      margin-left: auto;
+    }
+    
