@@ -26,7 +26,7 @@
             email: "prueba@gmail.com",
             departamento: "Administración",
             inicial: "B",
-            online: true,
+            online: false,
         },
         {
             nombre: "Pedro",
@@ -43,6 +43,7 @@
             online: true,
         },
     ];
+    
 
     let empleadosActivos = [...empleados]; // Usamos una copia de empleados al principio
     let departamentoSeleccionado = ""; // Variable para el filtro de departamento
@@ -93,7 +94,7 @@ function openPopup(emp) {
 
     const tituloInput = document.getElementById("titulo");
     if (tituloInput && tituloInput instanceof HTMLInputElement) {
-        tituloInput.value = emp.titulo || "Jefaza";  // Si el título no está en el objeto, dejarlo vacío
+        tituloInput.value = emp.titulo || "Empleado";  // Si el título no está en el objeto, dejarlo vacío
     }
 
     const correoInput = document.getElementById("correo");
@@ -113,7 +114,7 @@ function openPopup(emp) {
 
     const puestoInput = document.getElementById("puesto");
     if (puestoInput && puestoInput instanceof HTMLInputElement) {
-        puestoInput.value = emp.puesto || "Administrador";  // Lo mismo para el puesto
+        puestoInput.value = emp.puesto || "Empleado";  // Lo mismo para el puesto
     }
 
     const gerenteInput = document.getElementById("gerente");
@@ -140,7 +141,7 @@ function openPopup(emp) {
     // Sección de Información privada
     const direccionInput = document.getElementById("direccion");
     if (direccionInput && direccionInput instanceof HTMLInputElement) {
-        direccionInput.value = emp.direccion || "Casa d Beaaa";  // Si no tiene dirección, dejar vacío
+        direccionInput.value = emp.direccion || "Casa";  // Si no tiene dirección, dejar vacío
     }
 
     const dniInput = document.getElementById("dni");
@@ -150,7 +151,7 @@ function openPopup(emp) {
 
     const generoInput = document.getElementById("genero");
     if (generoInput && generoInput instanceof HTMLInputElement) {
-        generoInput.value = emp.genero || "Mujer";  // Si no tiene género, dejar vacío
+        generoInput.value = emp.genero || "Hombre";  // Si no tiene género, dejar vacío
     }
 
     const fechaNacimientoInput = document.getElementById("fecha-nacimiento");
