@@ -1,162 +1,3 @@
-<!-- <script>
-    import "../EmpleadosVista.css";
-    import NuevoEmpleado from "./nuevoEmpleado.svelte";
-
-    let empleados = [
-        {
-            nombre: "Beatriz",
-            email: "prueba@gmail.com",
-            departamento: "Administración",
-            inicial: "B",
-            online: true,
-        },
-    ];
-
-    let empleados2 = [
-        {
-            nombre: "Beatriz",
-            email: "prueba@gmail.com",
-            departamento: "Administración",
-            inicial: "B",
-            online: true,
-        },
-        {
-            nombre: "Pedro",
-            email: "pedro@gmail.com",
-            departamento: "Ventas",
-            inicial: "P",
-            online: true,
-        },
-    ];
-</script>
-
-<div class="app-empleados">
-    <div class="navbar">
-        <div class="menu">
-            <a href="#">Empleados</a>
-            <a href="#">Departamentos</a>
-            <a href="#">Informes</a>
-            <a href="#">Configuración</a>
-        </div>
-    </div>
-
-    <div class="app-content">
-        <div class="sidebar">
-            <button>Nuevo</button>
-            
-            <h3>DEPARTAMENTO</h3>
-            <ul>
-                <li><strong>Todos</strong></li>
-                <li>Administración (1)</li>
-            </ul>
-        </div>
-
-        <div class="main">
-            <div class="header">
-                <input type="text" class="search-bar" placeholder="Buscar..." />
-            </div>
-
-            <div class="empleados">
-                {#each empleados as emp}
-                    <div class="empleado-card">
-                        <div class="icon">{emp.inicial}</div>
-                        <div>
-                            <strong>{emp.nombre}</strong>
-                            <p>{emp.email}</p>
-                        </div>
-                        {#if emp.online}
-                            <div class="status"></div>
-                        {/if}
-                    </div>
-                {/each}
-            </div>
-        </div>
-    </div>
-</div> -->
-<!--
-<script>
-    import "../EmpleadosVista.css";
-    import NuevoEmpleado from "./nuevoEmpleado.svelte";
-
-    let empleados = [
-        {
-            nombre: "Beatriz",
-            email: "prueba@gmail.com",
-            departamento: "Administración",
-            inicial: "B",
-            online: true,
-        },
-    ];
-
-    let empleados2 = [
-        {
-            nombre: "Beatriz",
-            email: "prueba@gmail.com",
-            departamento: "Administración",
-            inicial: "B",
-            online: true,
-        },
-        {
-            nombre: "Pedro",
-            email: "pedro@gmail.com",
-            departamento: "Ventas",
-            inicial: "P",
-            online: true,
-        },
-    ];
-
-    let empleadosActivos = empleados; // Inicialmente, se usa la lista empleados
-
-    function toggleEmpleados() {
-        empleadosActivos = empleadosActivos === empleados ? empleados2 : empleados;
-    }
-</script>
-
-<div class="app-empleados">
-    <div class="navbar">
-        <div class="menu">
-            <a href="#">Empleados</a>
-            <a href="#">Departamentos</a>
-            <a href="#">Informes</a>
-            <a href="#">Configuración</a>
-        </div>
-    </div>
-
-    <div class="app-content">
-        <div class="sidebar">
-            <button on:click={toggleEmpleados}>Nuevo</button>
-            
-            <h3>DEPARTAMENTO</h3>
-            <ul>
-                <li><strong>Todos</strong></li>
-                <li>Administración (1)</li>
-            </ul>
-        </div>
-
-        <div class="main">
-            <div class="header">
-                <input type="text" class="search-bar" placeholder="Buscar..." />
-            </div>
-
-            <div class="empleados">
-                {#each empleadosActivos as emp}
-                    <div class="empleado-card">
-                        <div class="icon">{emp.inicial}</div>
-                        <div>
-                            <strong>{emp.nombre}</strong>
-                            <p>{emp.email}</p>
-                        </div>
-                        {#if emp.online}
-                            <div class="status"></div>
-                        {/if}
-                    </div>
-                {/each}
-            </div>
-        </div>
-    </div>
-</div>
--->
-
 
 <script>
     import "../EmpleadosVista.css";
@@ -234,9 +75,91 @@
         ? empleadosActivos.filter(emp => emp.departamento === departamentoSeleccionado)
         : empleadosActivos;
 
-        function openPopup() {
-        document.getElementById("popup").style.display = "block";
+    //     function openPopup() {
+    //     document.getElementById("popup").style.display = "block";
+    // }
+
+    let empleadoSeleccionado = null; // Variable para almacenar el empleado seleccionado
+
+function openPopup(emp) {
+    empleadoSeleccionado = emp; // Asignar el empleado seleccionado
+    document.getElementById("popup").style.display = "block"; // Mostrar el popup
+
+    // Rellenar los campos del formulario con los datos del empleado seleccionado
+    const nombreInput = document.getElementById("nombre");
+    if (nombreInput && nombreInput instanceof HTMLInputElement) {
+        nombreInput.value = emp.nombre;
     }
+
+    const tituloInput = document.getElementById("titulo");
+    if (tituloInput && tituloInput instanceof HTMLInputElement) {
+        tituloInput.value = emp.titulo || "Jefaza";  // Si el título no está en el objeto, dejarlo vacío
+    }
+
+    const correoInput = document.getElementById("correo");
+    if (correoInput && correoInput instanceof HTMLInputElement) {
+        correoInput.value = emp.email;
+    }
+
+    const telefonoInput = document.getElementById("telefono");
+    if (telefonoInput && telefonoInput instanceof HTMLInputElement) {
+        telefonoInput.value = emp.telefono || "123456789";  // Asegúrate de que tenga valor o dejes vacío si no
+    }
+
+    const departamentoInput = document.getElementById("departamento");
+    if (departamentoInput && departamentoInput instanceof HTMLInputElement) {
+        departamentoInput.value = emp.departamento;
+    }
+
+    const puestoInput = document.getElementById("puesto");
+    if (puestoInput && puestoInput instanceof HTMLInputElement) {
+        puestoInput.value = emp.puesto || "Administrador";  // Lo mismo para el puesto
+    }
+
+    const gerenteInput = document.getElementById("gerente");
+    if (gerenteInput && gerenteInput instanceof HTMLInputElement) {
+        gerenteInput.value = emp.gerente || "-";
+    }
+
+    const mentorInput = document.getElementById("mentor");
+    if (mentorInput && mentorInput instanceof HTMLInputElement) {
+        mentorInput.value = emp.mentor || "-";
+    }
+
+    // Sección de Información de trabajo
+    const horasInput = document.getElementById("horas");
+    if (horasInput && horasInput instanceof HTMLInputElement) {
+        horasInput.value = emp.horas || "60";  // Si no tiene horas, dejar vacío
+    }
+
+    const ubicacionInput = document.getElementById("ubicacion");
+    if (ubicacionInput && ubicacionInput instanceof HTMLInputElement) {
+        ubicacionInput.value = emp.ubicacion || "Oficinas";  // Si no tiene ubicación, dejar vacío
+    }
+
+    // Sección de Información privada
+    const direccionInput = document.getElementById("direccion");
+    if (direccionInput && direccionInput instanceof HTMLInputElement) {
+        direccionInput.value = emp.direccion || "Casa d Beaaa";  // Si no tiene dirección, dejar vacío
+    }
+
+    const dniInput = document.getElementById("dni");
+    if (dniInput && dniInput instanceof HTMLInputElement) {
+        dniInput.value = emp.dni || "12345678Z";  // Si no tiene DNI, dejar vacío
+    }
+
+    const generoInput = document.getElementById("genero");
+    if (generoInput && generoInput instanceof HTMLInputElement) {
+        generoInput.value = emp.genero || "Mujer";  // Si no tiene género, dejar vacío
+    }
+
+    const fechaNacimientoInput = document.getElementById("fecha-nacimiento");
+    if (fechaNacimientoInput && fechaNacimientoInput instanceof HTMLInputElement) {
+        fechaNacimientoInput.value = emp.fechaNacimiento || "16/03/2005";  // Si no tiene fecha de nacimiento, dejar vacío
+    }
+}
+
+
     function closePopup() {
         document.getElementById("popup").style.display = "none";
     }
@@ -307,17 +230,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
             <div class="empleados">
                 {#each empleadosFiltrados as emp}
-                    <div class="empleado-card">
-                        <div class="icon">{emp.inicial}</div>
-                        <div>
-                            <strong>{emp.nombre}</strong>
-                            <p>{emp.email}</p>
-                        </div>
-                        {#if emp.online}
-                            <div class="status"></div>
-                        {/if}
+                
+                <div class="empleado-card" on:click={() => openPopup(emp)}>
+                    <div class="icon">{emp.inicial}</div>
+                    <div>
+                        <strong>{emp.nombre}</strong>
+                        <p>{emp.email}</p>
                     </div>
-                {/each}
+                    {#if emp.online}
+                        <div class="status"></div>
+                    {/if}
+                </div>
+            {/each}
+            
+                
             </div>
         </div>
     </div>
