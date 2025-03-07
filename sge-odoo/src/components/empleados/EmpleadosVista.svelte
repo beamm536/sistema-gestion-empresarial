@@ -2,13 +2,32 @@
     import PagPrincipal from "./Vistas/principal.svelte";
     import Departamentos from "./Vistas/departamentos.svelte";
     import Jerarquiasdepartamentos from "./Vistas/jerarquiasdepartamentos.svelte";
-
+    import EliminarEmpleados from "./Vistas/eliminarEmpleados.svelte";
+    
     let vistaActual = "principal"; 
-    let mostrarDropdown = false; // Controla si se muestra el desplegable
+    let mostrarDropdownEmpleados = false; // Controla si se muestra el dropdown de empleados
+    let mostrarDropdownDepartamentos = false; // Controla si se muestra el dropdown de departamentos
 
     function cambiarVista(vista) {
         vistaActual = vista;
-        mostrarDropdown = false; // Cierra el dropdown al cambiar de vista
+        mostrarDropdownEmpleados = false; // Cierra el dropdown de empleados al cambiar de vista
+        mostrarDropdownDepartamentos = false; // Cierra el dropdown de departamentos al cambiar de vista
+    }
+
+    function toggleDropdownEmpleados() {
+        mostrarDropdownEmpleados = !mostrarDropdownEmpleados;
+        // Cierra el otro dropdown si está abierto
+        if (mostrarDropdownEmpleados) {
+            mostrarDropdownDepartamentos = false;
+        }
+    }
+
+    function toggleDropdownDepartamentos() {
+        mostrarDropdownDepartamentos = !mostrarDropdownDepartamentos;
+        // Cierra el otro dropdown si está abierto
+        if (mostrarDropdownDepartamentos) {
+            mostrarDropdownEmpleados = false;
+        }
     }
 </script>
 
@@ -16,12 +35,20 @@
     <div class="app">
         <div class="navbar">
             <div class="menu">
-                <a href="#" on:click|preventDefault={() => cambiarVista("principal")}>Empleados</a>
-
+                <!--<a href="#" on:click|preventDefault={() => cambiarVista("principal")}>Empleados</a>-->
+                <div class="dropdown">
+                    <a href="#" on:click|preventDefault={toggleDropdownEmpleados}>Empleados</a>
+                    {#if mostrarDropdownEmpleados}
+                        <div class="dropdown-content">
+                            <a href="#" on:click|preventDefault={() => cambiarVista("principal")}>Ver/añadir empleados</a>
+                            <a href="#" on:click|preventDefault={() => cambiarVista("eliminar-empleados")}>Eliminar empleados</a>
+                        </div>
+                    {/if}
+                </div>
                 <!-- Menú desplegable para Departamentos -->
                 <div class="dropdown">
-                    <a href="#" on:click|preventDefault={() => mostrarDropdown = !mostrarDropdown}>Departamentos</a>
-                    {#if mostrarDropdown}
+                    <a href="#" on:click|preventDefault={toggleDropdownDepartamentos}>Departamentos</a>
+                    {#if mostrarDropdownDepartamentos}
                         <div class="dropdown-content">
                             <a href="#" on:click|preventDefault={() => cambiarVista("departamentos")}>Departamentos</a>
                             <a href="#" on:click|preventDefault={() => cambiarVista("jerarquias")}>Jerarquía de Departamentos</a>
@@ -37,6 +64,8 @@
         <!-- Mostrar el componente correspondiente -->
         {#if vistaActual === "principal"}
             <PagPrincipal />
+        {:else if vistaActual === "eliminar-empleados"}
+            <EliminarEmpleados />
         {:else if vistaActual === "departamentos"}
             <Departamentos />
         {:else if vistaActual === "jerarquias"}
