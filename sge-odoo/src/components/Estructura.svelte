@@ -36,7 +36,7 @@
           class="icon-wrapper"
           style="transform: translate(-50%, -50%) rotate({i * (360 / imgs.length)}deg) translate(270px) rotate(-{i * (360 / imgs.length)}deg);"
         >
-          <IconoBoton {img} {label} />
+          <IconoBoton {img} {label}/>
         </div>
       {/each}
     </div>
