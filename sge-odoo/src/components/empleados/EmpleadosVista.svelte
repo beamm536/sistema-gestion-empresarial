@@ -3,6 +3,7 @@
     import Departamentos from "./Vistas/departamentos.svelte";
     import Jerarquiasdepartamentos from "./Vistas/jerarquiasdepartamentos.svelte";
     import EliminarEmpleados from "./Vistas/eliminarEmpleados.svelte";
+    import Informes from "./Vistas/informes.svelte";
     
     let vistaActual = "principal"; 
     let mostrarDropdownEmpleados = false; // Controla si se muestra el dropdown de empleados
@@ -56,8 +57,8 @@
                     {/if}
                 </div>
 
-                <a href="#">Informes</a>
-                <a href="#">Configuración</a>
+                <a href="#"on:click|preventDefault={() => cambiarVista("informes")}>Informes</a>
+                
             </div>
         </div>
 
@@ -70,6 +71,8 @@
             <Departamentos />
         {:else if vistaActual === "jerarquias"}
             <Jerarquiasdepartamentos />
+        {:else if vistaActual === "informes"}
+            <Informes/>
         {/if}
     </div>
 </div>

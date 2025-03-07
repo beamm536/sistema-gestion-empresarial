@@ -1,0 +1,1 @@
+<div>Aquí iria por lo menos 1 gráfico</div>
