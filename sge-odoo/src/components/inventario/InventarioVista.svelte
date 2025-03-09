@@ -99,7 +99,7 @@
       transition: background-color 0.3s ease, color 0.3s ease;
       background-color: #d7d6d6;
       color: #333;
-      font-size: 14px; /* Reducir tamaño de fuente */
+      font-size: 18px; /* Reducir tamaño de fuente */
       font-weight: 500;
       border: #c1c0c0 1px solid;
   }
