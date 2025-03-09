@@ -14,6 +14,11 @@
 
 <div class="app-empleados">
     <div class="app">
+        <!-- Título encima del Navbar -->
+        <div class="titulo">
+            Módulo de Ventas
+        </div>
+
         <nav class="navbar">
             <div class="navbar-container">
                 <div class="menu">
@@ -48,63 +53,74 @@
 </div>
 
 <style>
+    /* Estilos para el texto encima del Navbar */
+    .titulo {
+        text-align: center;
+        padding: 10px 0;
+        background-color: #8A7BB7; /* Fondo morado */
+        color: white; /* Texto blanco */
+        font-size: 24px;
+        font-weight: 600;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1100;
+    }
+
     /* Estilos del Navbar */
     .navbar {
-        /*background-color: #f0f0f0; /* Fondo gris claro */
         padding: 10px 20px;
         position: fixed;
         width: 100%;
-        top: 0;
+        top: 60px; /* Espacio debajo del título */
         left: 0;
         z-index: 1000;
-        /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
     }
 
     .navbar-container {
         display: flex;
-        justify-content: center; /* Centra la barra de navegación */
+        justify-content: center;
         align-items: center;
         width: 100%;
     }
 
     .menu {
         display: flex;
-        width: 100%; /* Hace que el menú ocupe todo el ancho disponible */
+        width: 100%;
         max-width: 1200px;
-        gap: 0; /* Elimina el espacio entre los elementos */
+        gap: 0;
     }
 
     .menu-item {
-        flex: 1; /* Cada ítem ocupará un tercio del espacio disponible */
+        flex: 1;
         display: flex;
-        justify-content: center; /* Centra el texto dentro de cada ítem */
+        justify-content: center;
         align-items: center;
         text-align: center;
         padding: 10px;
         cursor: pointer;
         transition: background-color 0.3s ease, color 0.3s ease;
-        background-color: #d7d6d6; /* Fondo gris claro */
-        color: #333; /* Texto gris oscuro */
+        background-color: #d7d6d6;
+        color: #333;
         font-size: 16px;
         font-weight: 500;
         border: #c1c0c0 1px solid;
     }
 
-    /* Estilo para la sección seleccionada */
     .menu-item.selected {
-        background-color: #8A7BB7; /* Fondo morado para el ítem seleccionado */
-        color: white; /* Texto blanco */
-        
+        background-color: #8A7BB7;
+        color: white;
     }
 
     .menu-item:hover {
         background-color: #b9b7b7;
-        color: white; /* Fondo gris más oscuro al pasar el mouse */
+        color: white;
     }
 
     /* Ajustes para asegurar que el contenido no quede oculto detrás del navbar */
     .app {
-        padding-top: 60px; /* Da espacio suficiente para que el navbar no tape el contenido */
+        padding-top: 120px; /* Da espacio suficiente para el título y el navbar */
     }
 
     /* Responsividad */
@@ -120,8 +136,8 @@
         }
 
         .menu-item {
-            flex: none; /* Los ítems no se estiran en pantallas pequeñas */
-            width: 100%; /* Asegura que cada ítem ocupe el 100% del ancho */
+            flex: none;
+            width: 100%;
         }
     }
 </style>
