@@ -5,6 +5,7 @@
   import IconoBoton from "./components/IconoBoton.svelte";
   import Estructura from "./components/Estructura.svelte";
   import EmpleadosVista from "./components/empleados/EmpleadosVista.svelte";
+  import InventarioVista from "./components/inventario/InventarioVista.svelte";
 
   let vista = "estructura";
 
@@ -13,10 +14,15 @@
     }
 </script>
 
-<div class="app">
+<div class="app-main">
   <!-- <IconoBoton /> -->
-  <!-- <Estructura /> -->
- <EmpleadosVista />
+   <div class="app-main-estructura">
+     <!-- <Estructura /> -->
+   </div>
+<!--  <EmpleadosVista /> -->
+
+ <InventarioVista/>
+
 
  
 </div>

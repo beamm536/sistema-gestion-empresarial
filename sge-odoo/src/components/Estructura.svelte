@@ -29,15 +29,17 @@
   </script>
     
 <!-- PARA LA POSICION DE LOS ICONOS -->
-  <div class="launcher">
+ <div class="contenedor-estructura">
+  <div class="launcher-vistaPrincipal">
     <div class="icons-container">
       {#each imgs as { img, label }, i}
         <div
           class="icon-wrapper"
           style="transform: translate(-50%, -50%) rotate({i * (360 / imgs.length)}deg) translate(270px) rotate(-{i * (360 / imgs.length)}deg);"
         >
-          <IconoBoton {img} {label} />
+          <IconoBoton {img} {label}/>
         </div>
       {/each}
     </div>
   </div>
+</div>
