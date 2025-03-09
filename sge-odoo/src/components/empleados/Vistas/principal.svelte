@@ -1,165 +1,7 @@
-<!-- <script>
-    import "../EmpleadosVista.css";
-    import NuevoEmpleado from "./nuevoEmpleado.svelte";
-
-    let empleados = [
-        {
-            nombre: "Beatriz",
-            email: "prueba@gmail.com",
-            departamento: "Administración",
-            inicial: "B",
-            online: true,
-        },
-    ];
-
-    let empleados2 = [
-        {
-            nombre: "Beatriz",
-            email: "prueba@gmail.com",
-            departamento: "Administración",
-            inicial: "B",
-            online: true,
-        },
-        {
-            nombre: "Pedro",
-            email: "pedro@gmail.com",
-            departamento: "Ventas",
-            inicial: "P",
-            online: true,
-        },
-    ];
-</script>
-
-<div class="app-empleados">
-    <div class="navbar">
-        <div class="menu">
-            <a href="#">Empleados</a>
-            <a href="#">Departamentos</a>
-            <a href="#">Informes</a>
-            <a href="#">Configuración</a>
-        </div>
-    </div>
-
-    <div class="app-content">
-        <div class="sidebar">
-            <button>Nuevo</button>
-            
-            <h3>DEPARTAMENTO</h3>
-            <ul>
-                <li><strong>Todos</strong></li>
-                <li>Administración (1)</li>
-            </ul>
-        </div>
-
-        <div class="main">
-            <div class="header">
-                <input type="text" class="search-bar" placeholder="Buscar..." />
-            </div>
-
-            <div class="empleados">
-                {#each empleados as emp}
-                    <div class="empleado-card">
-                        <div class="icon">{emp.inicial}</div>
-                        <div>
-                            <strong>{emp.nombre}</strong>
-                            <p>{emp.email}</p>
-                        </div>
-                        {#if emp.online}
-                            <div class="status"></div>
-                        {/if}
-                    </div>
-                {/each}
-            </div>
-        </div>
-    </div>
-</div> -->
-<!--
-<script>
-    import "../EmpleadosVista.css";
-    import NuevoEmpleado from "./nuevoEmpleado.svelte";
-
-    let empleados = [
-        {
-            nombre: "Beatriz",
-            email: "prueba@gmail.com",
-            departamento: "Administración",
-            inicial: "B",
-            online: true,
-        },
-    ];
-
-    let empleados2 = [
-        {
-            nombre: "Beatriz",
-            email: "prueba@gmail.com",
-            departamento: "Administración",
-            inicial: "B",
-            online: true,
-        },
-        {
-            nombre: "Pedro",
-            email: "pedro@gmail.com",
-            departamento: "Ventas",
-            inicial: "P",
-            online: true,
-        },
-    ];
-
-    let empleadosActivos = empleados; // Inicialmente, se usa la lista empleados
-
-    function toggleEmpleados() {
-        empleadosActivos = empleadosActivos === empleados ? empleados2 : empleados;
-    }
-</script>
-
-<div class="app-empleados">
-    <div class="navbar">
-        <div class="menu">
-            <a href="#">Empleados</a>
-            <a href="#">Departamentos</a>
-            <a href="#">Informes</a>
-            <a href="#">Configuración</a>
-        </div>
-    </div>
-
-    <div class="app-content">
-        <div class="sidebar">
-            <button on:click={toggleEmpleados}>Nuevo</button>
-            
-            <h3>DEPARTAMENTO</h3>
-            <ul>
-                <li><strong>Todos</strong></li>
-                <li>Administración (1)</li>
-            </ul>
-        </div>
-
-        <div class="main">
-            <div class="header">
-                <input type="text" class="search-bar" placeholder="Buscar..." />
-            </div>
-
-            <div class="empleados">
-                {#each empleadosActivos as emp}
-                    <div class="empleado-card">
-                        <div class="icon">{emp.inicial}</div>
-                        <div>
-                            <strong>{emp.nombre}</strong>
-                            <p>{emp.email}</p>
-                        </div>
-                        {#if emp.online}
-                            <div class="status"></div>
-                        {/if}
-                    </div>
-                {/each}
-            </div>
-        </div>
-    </div>
-</div>
--->
 
 
 <script>
-    import "../EmpleadosVista.css";
+    /*import "../EmpleadosVista.css";*/
     import NuevoEmpleado from "./nuevoEmpleado.svelte";
 
     let empleados = [
@@ -353,57 +195,48 @@ document.addEventListener("DOMContentLoaded", () => {
     //setTimeout(openPopup, 1000);
 });
 
+
+
 </script>
 
+<!-- Contenedor padre -->
 <div class="app-empleados">
-    <!--<div class="navbar">
-        <div class="menu">
-            <a href="#">Empleados</a>
-            <a href="#">Departamentos</a>
-            <a href="#">Informes</a>
-            <a href="#">Configuración</a>
-        </div>
-    </div>-->
-
-    <div class="app-content">
-        <div class="sidebar">
-            <!-- Botón para cambiar entre empleados -->
-            <button on:click={toggleEmpleados}>Nuevo</button>
-            
-            <h3>DEPARTAMENTO</h3>
-            <ul>
-                <li><strong on:click={() => departamentoSeleccionado = ""}>Todos</strong></li>
-                {#each Object.entries(departamentoCounts) as [departamento, count]}
-                    <li on:click={() => departamentoSeleccionado = departamento}>
-                        {departamento} 
-                    </li>
-                {/each}
-            </ul>
-        </div>
-
-        <div class="main">
-            <div class="header">
-                <input type="text" class="search-bar" placeholder="Buscar..." />
-            </div>
-
-            <div class="empleados">
-                {#each empleadosFiltrados as emp}
-                <div class="empleado-card" on:click={() => openPopup(emp)}>
-                    <div class="icon">{emp.inicial}</div>
-                    <div>
-                        <strong>{emp.nombre}</strong>
-                        <p>{emp.email}</p>
-                    </div>
-                    {#if emp.online}
-                        <div class="status"></div>
-                    {/if}
-                </div>
-            {/each}
-            </div>
-        </div>
+  
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <button class="nuevo" on:click={toggleEmpleados}>Nuevo Empleado</button>
+      <h3>DEPARTAMENTO</h3>
+      <ul>
+        <li><strong on:click={() => departamentoSeleccionado = ""}>Todos</strong></li>
+        {#each Object.entries(departamentoCounts) as [departamento, count]}
+          <li on:click={() => departamentoSeleccionado = departamento}>
+            {departamento}
+          </li>
+        {/each}
+      </ul>
     </div>
-</div>
-
+  
+    <!-- Contenido principal -->
+    <div class="main">
+      <div class="header">
+        <input type="text" class="search-bar" placeholder="Buscar..." />
+      </div>
+      <div class="empleados">
+        {#each empleadosFiltrados as emp}
+          <div class="empleado-card" on:click={() => openPopup(emp)}>
+            <div class="icon">{emp.inicial}</div>
+            <div>
+              <strong>{emp.nombre}</strong>
+              <p>{emp.email}</p>
+            </div>
+            {#if emp.online}
+              <div class="status"></div>
+            {/if}
+          </div>
+        {/each}
+      </div>
+    </div>
+  </div>
 
 
 
@@ -440,8 +273,8 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
             <!-- Sección Curriculum -->
-            <div class="form-section">
-                <button type="button" class="expand-btn" id="expand-curriculum">Currículum</button>
+            <div class="form-section2">
+                <button type="button" class="expand-btn" id="expand-curriculum">  ▼ Currículum</button>
                 <div class="expandable" id="curriculum">
                     <label for="cv">Sube tu CV:</label>
                     <input type="file" id="cv" name="cv">
@@ -449,8 +282,8 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
             <!-- Sección Información de trabajo -->
-            <div class="form-section">
-                <button type="button" class="expand-btn" id="expand-trabajo">Información de trabajo</button>
+            <div class="form-section2">
+                <button type="button" class="expand-btn" id="expand-trabajo">   ▼ Información de trabajo</button>
                 <div class="expandable" id="informacion-trabajo">
                     <label for="horas">Horas laborales/semana:</label>
                     <input type="number" id="horas" name="horas" required>
@@ -461,8 +294,8 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
             <!-- Sección Información privada -->
-            <div class="form-section">
-                <button type="button" class="expand-btn" id="expand-privada">Información privada</button>
+            <div class="form-section2">
+                <button type="button" class="expand-btn" id="expand-privada">  ▼ Información privada </button>
                 <div class="expandable" id="informacion-privada">
                     <label for="direccion">Dirección privada:</label>
                     <input type="text" id="direccion" name="direccion" required>
@@ -488,128 +321,276 @@ document.addEventListener("DOMContentLoaded", () => {
 </div>
 
 <style>
-    /* Estilos generales del popup */
-/* Estilos generales del popup */
+/* Reset y configuración global */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fff; /* Fondo blanco */
+  color: #333; /* Texto en gris oscuro */
+}
+
+/* Contenedor principal */
+.app-empleados {
+   margin-top: -70px;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: #f5f5f5; /* Gris muy claro */
+  width: 250px;
+  padding: 20px;
+  border-right: 2px solid #ddd;
+  padding-top: 130px;
+}
+
+button, .nuevo{
+    padding: 8px 16px;
+        background-color: #8A7BB7;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 18px;
+}
+button, .nuevo:hover{
+    background-color: #786aa0;
+}
+.sidebar h3 {
+    margin-top: 30px;
+  color: #8A7BB7; /* Color de acento */
+  margin-bottom: 15px;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar li {
+  padding: 10px;
+  cursor: pointer;
+  color: #333;
+  transition: background-color 0.3s;
+}
+
+.sidebar li:hover {
+  background-color: #ddd;
+}
+
+/* Área principal */
+.main {
+   
+  flex: 1;
+  background-color: #fff;
+  padding: 20px;
+}
+
+/* Barra de búsqueda en el header */
+.header .search-bar {
+   margin-top: 100px;
+  width: 30%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Tarjetas de empleados */
+.empleados {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.empleado-card {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.empleado-card:hover {
+  background-color: #eee;
+}
+
+.empleado-card .icon {
+  background-color: #8A7BB7;
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.empleado-card strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Popup */
 .popup {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding-top: 50px;
-    box-sizing: border-box;
+  display: none;
+  position: fixed;
+  z-index: 9999; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .popup-content {
-    background-color: white;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 5px;
-    width: 90%;
-    max-width: 600px;
-    box-sizing: border-box;
-    overflow-y: auto;
-    height: 80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 900px; /* Aumenta el ancho máximo del popup */
+  max-height: 90%;
+  overflow-y: auto;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  border: 2px solid #8A7BB7; /* Borde de acento */
+  box-sizing: border-box;
 }
 
+.popup-content h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Botón de cierre */
 .close-btn {
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold;
-    position: absolute;
-    top: 10px;
-    right: 25px;
-    cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #8A7BB7;
+  cursor: pointer;
 }
 
-.close-btn:hover,
-.close-btn:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* Estilos de formulario */
+/* Estilos generales del formulario */
 form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Mayor separación entre secciones */
+
 }
 
+/* Organización de cada sección del formulario con grid */
 .form-section {
-    margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 30% 70%; /* Etiqueta e input en dos columnas */
+  gap: 10px 15px;
+  align-items: center;
 }
 
-label {
-    font-weight: bold;
+/* Estilo para las etiquetas */
+.form-section label {
+  text-align: right;
+  padding-right: 10px;
+  font-weight: bold;
+  color: #333;
 }
 
-input, select {
-    padding: 8px;
-    margin: 5px 0;
+/* Estilo para los campos de entrada y select */
+.form-section input,
+.form-section select {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+ .form-section2, button{
     width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+ }
+/* Elementos que deben ocupar todo el ancho (como botones de expansión y el botón de enviar) */
+.form-section2 > .expand-btn,
+.form-section2 > button {
+  grid-column: 1 / -1;
+  text-align: left;
+  background-color: #e0e0e0; /* Gris medio para el botón de expansión */
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+.form-section2 > .expand-btn:hover,
+.form-section2 > button:hover{
+    background-color: #8A7BB7;
 }
 
-/* Estilos de botones */
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 15px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
-/* Secciones desplegables */
-.expand-btn {
-    background-color: #f0f0f0;
-    border: none;
-    padding: 10px;
-    width: 100%;
-    text-align: left;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
+/* Organización de las secciones expandibles con grid */
 .expandable {
-    display: none;
-    margin-top: 10px;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  gap: 10px 15px;
+  align-items: center;
+  padding: 10px 0;
 }
 
-.expandable input {
-    width: 100%;
+.expandable input,
+.expandable select {
+  width: 100%;
+}
+.expandable {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espacio entre cada bloque label+input */
+  padding: 10px 0;
 }
 
-/* Responsive Styles */
+.expandable label {
+  text-align: left; 
+  font-weight: bold;
+  color: #333;
+}
+
+.expandable input,
+.expandable select {
+  width: 100%; /* Para que ocupen todo el ancho disponible */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+/* Responsive */
 @media (max-width: 768px) {
-    .popup-content {
-        width: 95%;
-        padding: 15px;
-    }
-
-    .close-btn {
-        font-size: 24px;
-        top: 5px;
-        right: 15px;
-    }
-
-    button {
-        padding: 8px 12px;
-    }
-
-    .expand-btn {
-        font-size: 14px;
-    }
+  .sidebar {
+    width: 200px;
+    padding: 15px;
+  }
+  
+  .empleados {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+  
+  .popup-content {
+    width: 95%;
+    padding: 15px;
+  }
 }
 
 </style>
