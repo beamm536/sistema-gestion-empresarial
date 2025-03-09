@@ -14,10 +14,12 @@
     }
 </script>
 
-<div class="app">
+<div class="app-main">
   <!-- <IconoBoton /> -->
-  <!-- <Estructura /> -->
- <!--<EmpleadosVista /> -->
+   <div class="app-main-estructura">
+     <!-- <Estructura /> -->
+   </div>
+<!--  <EmpleadosVista /> -->
 
  <InventarioVista/>
 
