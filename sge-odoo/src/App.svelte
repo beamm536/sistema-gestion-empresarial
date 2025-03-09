@@ -1,4 +1,9 @@
 <script>
+
+  //importaciones para el enrutamiento
+  import Router from 'svelte-spa-router';
+  import routes from './routes';
+
   import svelteLogo from "./assets/svelte.svg";
   import viteLogo from "/vite.svg";
   import Counter from "./lib/Counter.svelte";
@@ -15,13 +20,15 @@
 </script>
 
 <div class="app-main">
-  <!-- <IconoBoton /> -->
+
+  <Router {routes} />
+  
    <div class="app-main-estructura">
-     <!-- <Estructura /> -->
+     <Estructura />
    </div>
 <!--  <EmpleadosVista /> -->
 
- <InventarioVista/>
+<!--  <InventarioVista/> -->
 
 
  

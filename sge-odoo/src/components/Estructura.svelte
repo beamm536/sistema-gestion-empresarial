@@ -1,6 +1,7 @@
 <script>
     import IconoBoton from "./IconoBoton.svelte";
-    import './styles/Estructura.css'
+    import './styles/Estructura.css';
+    import { push } from 'svelte-spa-router';
 
     /* import imgFacturacion from "../../public/imgs/facturacion.png"
     import imgVentas from "../../public/imgs/ventas.png"
@@ -26,6 +27,20 @@
   { img: "/imgs/empleados.png", label: "Empleados"}
 ];
 
+function handleClick(label) {
+    console.log('Navegando a:', label);
+    
+    // Aquí defines la ruta dependiendo del label
+    if (label === "Empleados") {
+      push('/empleados');
+    } else if (label === "Inventario") {
+      push('/inventario');
+    } else {
+      // Ruta por defecto o podrías mostrar una alerta
+      push('/');
+    }
+  }
+
   </script>
     
 <!-- PARA LA POSICION DE LOS ICONOS -->
@@ -37,7 +52,9 @@
           class="icon-wrapper"
           style="transform: translate(-50%, -50%) rotate({i * (360 / imgs.length)}deg) translate(270px) rotate(-{i * (360 / imgs.length)}deg);"
         >
-          <IconoBoton {img} {label}/>
+          <div on:click={() => handleClick(label)} style="cursor: pointer;">
+            <IconoBoton {img} {label} />
+          </div>
         </div>
       {/each}
     </div>
