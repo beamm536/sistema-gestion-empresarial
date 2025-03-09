@@ -42,6 +42,8 @@
 
     let empleadosActivos = [...empleados2]; // Usamos empleados2 al principio
     let departamentoSeleccionado = ""; // Variable para el filtro de departamento
+    let searchText = ""; // Variable para el texto de búsqueda
+
 
     // Función para alternar entre listas de empleados
     function toggleEmpleados() {
@@ -56,9 +58,13 @@
     $: departamentoCounts = countEmpleadosByDepartamento();
 
     // Filtrar empleados por departamento seleccionado
-    $: empleadosFiltrados = departamentoSeleccionado
-        ? empleadosActivos.filter(emp => emp.departamento === departamentoSeleccionado)
-        : empleadosActivos;
+    $: empleadosFiltrados = empleadosActivos.filter(emp => 
+        (departamentoSeleccionado ? emp.departamento === departamentoSeleccionado : true) &&
+        (emp.nombre.toLowerCase().includes(searchText.toLowerCase()) || 
+        emp.email.toLowerCase().includes(searchText.toLowerCase()))
+    );
+
+
 
     // Función para contar empleados por departamento
     function countEmpleadosByDepartamento() {
@@ -87,7 +93,7 @@
 
         <div class="main">
             <div class="header">
-                <input type="text" class="search-bar" placeholder="Buscar..." />
+              <input type="text" class="search-bar" placeholder="Buscar..." bind:value={searchText} />
             </div>
 
             <div class="empleados">
