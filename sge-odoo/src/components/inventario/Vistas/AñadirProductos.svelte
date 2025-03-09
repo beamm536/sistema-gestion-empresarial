@@ -266,10 +266,15 @@
         font-size: 14px;
         color: #333;
     }
+    /*.form-section textarea {
+        resize: vertical;
+        min-height: 80px;
+    }*/
 
     .form-section input,
     .form-section textarea {
         padding: 8px;
+        resize: vertical;
         margin-bottom: 10px;
         border: 1px solid #ccc;
         border-radius: 4px;
@@ -279,11 +284,12 @@
     border-color: #8A7BB7; /* Borde color morado al enfocarse */
     outline: none;
 }
+.form-section textarea:focus {
+    border-color: #8A7BB7; /* Borde color morado al enfocarse */
+    outline: none;
+}
 
-    .form-section textarea {
-        resize: vertical;
-        min-height: 80px;
-    }
+    
 
     button[type="submit"] {
         padding: 10px 20px;
