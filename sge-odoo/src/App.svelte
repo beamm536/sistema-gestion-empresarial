@@ -11,6 +11,7 @@
   import Estructura from "./components/Estructura.svelte";
   import EmpleadosVista from "./components/empleados/EmpleadosVista.svelte";
   import InventarioVista from "./components/inventario/InventarioVista.svelte";
+  import VentasVista from "./components/ventas/ventasVista.svelte";
 
   let vista = "estructura";
 
@@ -28,7 +29,8 @@
    </div>
 <!--  <EmpleadosVista /> -->
 
-<!--  <InventarioVista/> -->
+ <!--<InventarioVista/>-->
+ <VentasVista/>
 
 
  
