@@ -73,6 +73,7 @@
 <div class="app-empleados">
     <div class="app-content">
         <div class="sidebar">
+            <!-- Se eliminó el botón de "Nuevo Empleado" -->
             <h3>DEPARTAMENTO</h3>
             <ul>
                 <li><strong on:click={() => departamentoSeleccionado = ""}>Todos</strong></li>
@@ -93,7 +94,7 @@
                 {#each empleadosFiltrados as emp}
                     <div class="empleado-card">
                         <div class="icon">{emp.inicial}</div>
-                        <div>
+                        <div class="info">
                             <strong>{emp.nombre}</strong>
                             <p>{emp.email}</p>
                         </div>
@@ -112,69 +113,277 @@
 </div>
 
 <style>
-    .app-content {
-        display: flex;
-        justify-content: space-between;
-    }
+/* Reset y configuración global */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    .sidebar {
-        width: 250px;
-        padding: 10px;
-        background-color: #f4f4f4;
-    }
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fff; /* Fondo blanco */
+  color: #333; /* Texto en gris oscuro */
+}
 
-    .sidebar ul {
-        list-style-type: none;
-        padding: 0;
-    }
+/* Contenedor principal */
+.app-empleados {
+  margin-top: -70px;
+  display: flex;
+  min-height: 100vh;
+}
 
-    .sidebar li {
-        padding: 10px;
-        cursor: pointer;
-    }
+/* Contenedor de contenido */
+.app-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
 
-    .sidebar li:hover {
-        background-color: #ddd;
-    }
+/* Sidebar */
+.sidebar {
+  background-color: #f5f5f5; /* Gris muy claro */
+  width: 250px;
+  padding: 20px;
+  padding-top: 130px;
+  border-right: 2px solid #ddd;
+}
 
-    .main {
-        flex: 1;
-        padding: 10px;
-    }
+.sidebar h3 {
+  margin-top: 30px;
+  color: #8A7BB7; /* Color de acento */
+  margin-bottom: 15px;
+}
 
-    .empleado-card {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-        padding: 10px;
-        background-color: #fff;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+.sidebar ul {
+  list-style: none;
+}
 
-    .empleado-card .icon {
-        font-size: 30px;
-        font-weight: bold;
-        margin-right: 10px;
-    }
+.sidebar li {
+  padding: 10px;
+  cursor: pointer;
+  color: #333;
+  transition: background-color 0.3s;
+}
 
-    .empleado-card .status {
-        width: 10px;
-        height: 10px;
-        background-color: green;
-        border-radius: 50%;
-    }
+.sidebar li:hover {
+  background-color: #ddd;
+}
 
-    .empleado-card .papelera {
-        margin-left: auto;
-        cursor: pointer;
-        font-size: 20px;
-        padding: 5px;
-        border-radius: 50%;
-    }
+/* Área principal */
+.main {
+  flex: 1;
+  background-color: #fff;
+  padding: 20px;
+}
 
-    .empleado-card .papelera:hover {
-        background-color: red;
-        color: white;
-    }
+/* Barra de búsqueda en el header */
+.header .search-bar {
+  margin-top: 100px;
+  width: 30%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Tarjetas de empleados */
+.empleados {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+
+
+.empleado-card {
+  background-color: #f9f9f9;
+  padding: 10px;     /* Antes 20px */
+  min-height: 80px;  /* Antes 120px */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.empleado-card .icon {
+  background-color: #8A7BB7;
+  color: #fff;
+  font-size: 20px;   /* Antes 24px */
+  font-weight: bold;
+  width: 40px;       /* Antes 50px */
+  height: 40px;      /* Antes 50px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+
+.empleado-card:hover {
+  background-color: #eee;
+}
+
+/* .empleado-card .icon {
+  background-color: #8A7BB7;
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-right: 15px;
+} */
+
+.empleado-card .info {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.empleado-card strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.empleado-card .status {
+  width: 10px;
+  height: 10px;
+  background-color: green;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+.empleado-card .papelera {
+  margin-left: auto;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.empleado-card .papelera:hover {
+  background-color: red;
+  color: white;
+}
+
+/* Popup (si se requiere) */
+.popup {
+  display: none;
+  position: fixed;
+  z-index: 9999; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 900px;
+  max-height: 90%;
+  overflow-y: auto;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  border: 2px solid #8A7BB7;
+  box-sizing: border-box;
+}
+
+.popup-content h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #8A7BB7;
+  cursor: pointer;
+}
+
+/* Estilos generales del formulario (en caso de que se use un popup) */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Organización de cada sección del formulario con grid */
+.form-section {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  gap: 10px 15px;
+  align-items: center;
+}
+
+.form-section label {
+  text-align: right;
+  padding-right: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-section input,
+.form-section select {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Secciones expandibles (si se requieren) */
+.expandable {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.expandable label {
+  text-align: left;
+  font-weight: bold;
+  color: #333;
+}
+
+.expandable input,
+.expandable select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+    padding: 15px;
+  }
+  
+  .empleados {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+  
+  .popup-content {
+    width: 95%;
+    padding: 15px;
+  }
+}
 </style>
