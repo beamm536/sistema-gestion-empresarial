@@ -29,7 +29,8 @@
   </script>
     
 <!-- PARA LA POSICION DE LOS ICONOS -->
-  <div class="launcher">
+ <div class="contenedor-estructura">
+  <div class="launcher-vistaPrincipal">
     <div class="icons-container">
       {#each imgs as { img, label }, i}
         <div
@@ -41,3 +42,4 @@
       {/each}
     </div>
   </div>
+</div>
