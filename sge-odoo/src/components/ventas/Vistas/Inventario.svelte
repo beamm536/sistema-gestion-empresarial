@@ -52,22 +52,29 @@
     }
 
     /* Barra de búsqueda */
-    .search-bar {
-        width: 100%;
-        max-width: 400px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 16px;
-        outline: none;
-        background-color: #fff;
-        color: #333;
-        transition: border-color 0.3s;
-    }
+.search-bar {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #333333;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
 
-    .search-bar:focus {
-        border-color: #888; /* Gris oscuro */
-    }
+.search-bar:focus {
+    border-color: #8A7BB7; /* Color morado al hacer foco */
+    outline: none;
+}
+
+/* Cambiar el borde de la barra de búsqueda al hacer hover */
+.search-bar:hover {
+    border-color: #8A7BB7; /* Color morado al hacer hover */
+}
+
 
     /* Contenedor de productos */
     .productos-grid {
@@ -92,7 +99,8 @@
 
     .producto-card:hover {
         transform: scale(1.02);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Gris más oscuro */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        border-color: #8A7BB7;
     }
 
     .producto-nombre {
