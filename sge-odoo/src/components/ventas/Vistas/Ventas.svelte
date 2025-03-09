@@ -221,7 +221,7 @@
         border-radius: 5px;
         cursor: pointer;
         transition: background-color 0.3s;
-        margin-top: 65px;
+        margin-top: 130px;
     }
 
     .finalizar-btn, .siguiente-btn{
