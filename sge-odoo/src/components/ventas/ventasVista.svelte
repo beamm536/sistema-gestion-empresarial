@@ -4,11 +4,11 @@
     import Ventas from "./Vistas/Ventas.svelte";
 
     let vistaActual = "principal";
-    let mostrarDropdownProductos = false;
+    let mostrarDropdownProductos = false; // Controla si se muestra el dropdown de empleados
 
     function cambiarVista(vista) {
         vistaActual = vista;
-        mostrarDropdownProductos = false;
+        mostrarDropdownProductos = false; // Cierra el dropdown de empleados al cambiar de vista
     }
 
     function toggleDropdownProductos() {
@@ -20,27 +20,11 @@
     <div class="app">
         <div class="navbar">
             <div class="menu">
-                <button type="button" on:click={() => cambiarVista("principal")}>
-                    Información General
-                </button>
+                <span role="button" tabindex="0" on:click={() => cambiarVista("principal")}>Informacion General</span>
 
-                <div class="dropdown">
-                    <button type="button" on:click={toggleDropdownProductos}>
-                        Ventas
-                    </button>
+                <span role="button" tabindex="0" on:click={() => cambiarVista("ventas")}>Ventas</span>
 
-                    {#if mostrarDropdownProductos}
-                        <div class="dropdown-content">
-                            <button type="button" on:click={() => cambiarVista("ventas")}>
-                                Ver/hacer una venta
-                            </button>
-                        </div>
-                    {/if}
-                </div>
-
-                <button type="button" on:click={() => cambiarVista("inventario")}>
-                    Inventario
-                </button>
+                <span role="button" tabindex="0" on:click={() => cambiarVista("inventario")}>Inventario</span>
             </div>
         </div>
 
@@ -69,20 +53,20 @@
         align-items: center;
     }
 
-    .menu button {
-        background: none;
-        border: none;
+    .menu span {
         color: white;
-        font-size: 16px;
+        text-decoration: none;
         padding: 8px;
+        font-size: 16px;
         cursor: pointer;
     }
 
-    .menu button:hover {
+    .menu span:hover {
         background-color: #34495e;
         border-radius: 4px;
     }
 
+    /* Estilo del dropdown */
     .dropdown {
         position: relative;
         display: inline-block;
@@ -98,7 +82,7 @@
         margin-top: 8px;
     }
 
-    .dropdown-content button {
+    .dropdown-content span {
         color: white;
         padding: 10px;
         display: block;
@@ -106,7 +90,7 @@
         font-size: 14px;
     }
 
-    .dropdown-content button:hover {
+    .dropdown-content span:hover {
         background-color: #34495e;
     }
 </style>

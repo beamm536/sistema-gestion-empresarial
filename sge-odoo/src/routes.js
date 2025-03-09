@@ -9,5 +9,5 @@ export default{
     '/': Home,
     '/empleados': EmpleadosVista,
     '/inventario': InventarioVista,
-    '/ventas': VentasVista
+    '/ventas': VentasVista,
 };
