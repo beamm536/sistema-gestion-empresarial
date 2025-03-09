@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
     import { onMount } from 'svelte';
     import Chart from 'chart.js/auto';
   
@@ -80,5 +80,65 @@
   
   <div class="chart-container">
     <canvas bind:this={chartCanvas}></canvas>
+  </div>
+   -->
+
+
+   <script>
+    import { onMount } from 'svelte';
+    import Chart from 'chart.js/auto';
+  
+    let canvas;
+  
+    const data = [
+      { day: "2021-09-01", productoA: 150, productoB: 120, productoC: 200 },
+      { day: "2021-09-02", productoA: 180, productoB: 100, productoC: 220 },
+      { day: "2021-09-03", productoA: 170, productoB: 130, productoC: 210 },
+      { day: "2021-09-04", productoA: 160, productoB: 140, productoC: 230 },
+      { day: "2021-09-05", productoA: 190, productoB: 110, productoC: 240 }
+    ];
+  
+    const labels = data.map(item => item.day);
+    const productoA = data.map(item => item.productoA);
+    const productoB = data.map(item => item.productoB);
+    const productoC = data.map(item => item.productoC);
+  
+    onMount(() => {
+      new Chart(canvas, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [
+            { label: 'Producto A', data: productoA, backgroundColor: 'rgba(54, 162, 235, 0.5)' },
+            { label: 'Producto B', data: productoB, backgroundColor: 'rgba(75, 192, 192, 0.5)' },
+            { label: 'Producto C', data: productoC, backgroundColor: 'rgba(255, 99, 132, 0.5)' }
+          ]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: { display: true, text: 'Ventas Totales' }
+            },
+            x: {
+              title: { display: true, text: 'Días' }
+            }
+          }
+        }
+      });
+    });
+  </script>
+  
+  <style>
+    .chart-container {
+      width: 80vw;
+      max-width: 800px;
+      margin: 20px auto;
+    }
+  </style>
+  
+  <div class="chart-container">
+    <canvas bind:this={canvas}></canvas>
   </div>
   
