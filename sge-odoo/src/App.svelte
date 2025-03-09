@@ -30,7 +30,7 @@
 <!--  <EmpleadosVista /> -->
 
  <!--<InventarioVista/>-->
- <VentasVista/>
+ <!--<VentasVista/>-->
 
 
 

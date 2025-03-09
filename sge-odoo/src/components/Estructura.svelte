@@ -35,6 +35,8 @@ function handleClick(label) {
       push('/empleados');
     } else if (label === "Inventario") {
       push('/inventario');
+    } else if (label === "Ventas") {
+      push('/ventas');
     } else {
       // Ruta por defecto o podrías mostrar una alerta
       push('/');
