@@ -1,155 +1,165 @@
 <script>
   import PagPrincipal from "./Vistas/principal.svelte";
+  import EliminarEmpleados from "./Vistas/eliminarEmpleados.svelte";
   import Departamentos from "./Vistas/departamentos.svelte";
   import Jerarquiasdepartamentos from "./Vistas/jerarquiasdepartamentos.svelte";
-  import EliminarEmpleados from "./Vistas/eliminarEmpleados.svelte";
   import Informes from "./Vistas/informes.svelte";
 
   let vistaActual = "principal";
-  let mostrarDropdownEmpleados = false; // Controla si se muestra el dropdown de empleados
-  let mostrarDropdownDepartamentos = false; // Controla si se muestra el dropdown de departamentos
 
   function cambiarVista(vista) {
     vistaActual = vista;
-    mostrarDropdownEmpleados = false; // Cierra el dropdown de empleados al cambiar de vista
-    mostrarDropdownDepartamentos = false; // Cierra el dropdown de departamentos al cambiar de vista
-  }
-
-  function toggleDropdownEmpleados() {
-    mostrarDropdownEmpleados = !mostrarDropdownEmpleados;
-    // Cierra el otro dropdown si está abierto
-    if (mostrarDropdownEmpleados) {
-      mostrarDropdownDepartamentos = false;
-    }
-  }
-
-  function toggleDropdownDepartamentos() {
-    mostrarDropdownDepartamentos = !mostrarDropdownDepartamentos;
-    // Cierra el otro dropdown si está abierto
-    if (mostrarDropdownDepartamentos) {
-      mostrarDropdownEmpleados = false;
-    }
   }
 </script>
 
 <div class="app-empleados">
   <div class="app">
-    <div class="navbar">
-      <div class="menu">
-        <!--<a href="#" on:click|preventDefault={() => cambiarVista("principal")}>Empleados</a>-->
-        <div class="dropdown">
-          <a href="#" on:click|preventDefault={toggleDropdownEmpleados}
-            >Empleados</a
-          >
-          {#if mostrarDropdownEmpleados}
-            <div class="dropdown-content">
-              <a
-                href="#"
-                on:click|preventDefault={() => cambiarVista("principal")}
-                >Ver/añadir empleados</a
-              >
-              <a
-                href="#"
-                on:click|preventDefault={() =>
-                  cambiarVista("eliminar-empleados")}>Eliminar empleados</a
-              >
-            </div>
-          {/if}
-        </div>
-        <!-- Menú desplegable para Departamentos -->
-        <div class="dropdown">
-          <a href="#" on:click|preventDefault={toggleDropdownDepartamentos}
-            >Departamentos</a
-          >
-          {#if mostrarDropdownDepartamentos}
-            <div class="dropdown-content">
-              <a
-                href="#"
-                on:click|preventDefault={() => cambiarVista("departamentos")}
-                >Departamentos</a
-              >
-              <a
-                href="#"
-                on:click|preventDefault={() => cambiarVista("jerarquias")}
-                >Jerarquía de Departamentos</a
-              >
-            </div>
-          {/if}
-        </div>
-
-        <a href="#" on:click|preventDefault={() => cambiarVista("informes")}
-          >Informes</a
-        >
-      </div>
+    <!-- Título fijo en la parte superior -->
+    <div class="titulo">
+      Módulo de Empleados
     </div>
 
-    <!-- Mostrar el componente correspondiente -->
-    {#if vistaActual === "principal"}
-      <PagPrincipal />
-    {:else if vistaActual === "eliminar-empleados"}
-      <EliminarEmpleados />
-    {:else if vistaActual === "departamentos"}
-      <Departamentos />
-    {:else if vistaActual === "jerarquias"}
-      <Jerarquiasdepartamentos />
-    {:else if vistaActual === "informes"}
-      <Informes />
-    {/if}
+    <!-- Navbar fijo debajo del título -->
+    <nav class="navbar">
+      <div class="navbar-container">
+        <div class="menu">
+          <div 
+            class="menu-item" 
+            on:click={() => cambiarVista("principal")}
+            class:selected={vistaActual === "principal"}>
+            Ver/añadir empleados
+          </div>
+          <div 
+            class="menu-item" 
+            on:click={() => cambiarVista("eliminar-empleados")}
+            class:selected={vistaActual === "eliminar-empleados"}>
+            Eliminar empleados
+          </div>
+          <div 
+            class="menu-item" 
+            on:click={() => cambiarVista("departamentos")}
+            class:selected={vistaActual === "departamentos"}>
+            Departamentos
+          </div>
+          <div 
+            class="menu-item" 
+            on:click={() => cambiarVista("jerarquias")}
+            class:selected={vistaActual === "jerarquias"}>
+            Jerarquía de Departamentos
+          </div>
+          <div 
+            class="menu-item" 
+            on:click={() => cambiarVista("informes")}
+            class:selected={vistaActual === "informes"}>
+            Informes
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Espacio para que el contenido no quede oculto detrás del navbar -->
+    <div class="contenido">
+      {#if vistaActual === "principal"}
+        <PagPrincipal />
+      {:else if vistaActual === "eliminar-empleados"}
+        <EliminarEmpleados />
+      {:else if vistaActual === "departamentos"}
+        <Departamentos />
+      {:else if vistaActual === "jerarquias"}
+        <Jerarquiasdepartamentos />
+      {:else if vistaActual === "informes"}
+        <Informes />
+      {/if}
+    </div>
   </div>
 </div>
 
 <style>
+  /* Título fijo en la parte superior */
+  .titulo {
+      text-align: center;
+      padding: 10px 0;
+      background-color: #8A7BB7; /* Fondo morado */
+      color: white; /* Texto blanco */
+      font-size: 24px;
+      font-weight: 600;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1100;
+  }
+
+  /* Navbar fijo debajo del título */
   .navbar {
-    background-color: #2c3e50;
-    padding: 10px;
-    display: flex;
-    align-items: center;
+      padding: 8px 15px;
+      position: fixed;
+      width: 100%;
+      top: 60px; /* Espacio debajo del título */
+      left: 0;
+      z-index: 1000;
+  }
+
+  .navbar-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
   }
 
   .menu {
-    display: flex;
-    gap: 15px;
-    align-items: center; /* Alinea verticalmente los elementos del menú */
+      display: flex;
+      width: 100%;
+      max-width: 1200px;
+      gap: 0;
   }
 
-  .menu a {
-    color: white;
-    text-decoration: none;
-    padding: 8px;
-    font-size: 16px;
-    cursor: pointer;
+  .menu-item {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 8px 12px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      background-color: #d7d6d6;
+      color: #333;
+      font-size: 18px;
+      font-weight: 500;
+      border: 1px solid #c1c0c0;
   }
 
-  .menu a:hover {
-    background-color: #34495e;
-    border-radius: 4px;
+  .menu-item.selected {
+      background-color: #8A7BB7;
+      color: white;
   }
 
-  /* Estilo del dropdown */
-  .dropdown {
-    position: relative;
-    display: inline-block; /* Asegura que el dropdown esté alineado correctamente con los demás enlaces */
+  .menu-item:hover {
+      background-color: #b9b7b7;
+      color: white;
   }
 
-  .dropdown-content {
-    position: absolute;
-    background-color: #2c3e50;
-    min-width: 180px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    border-radius: 4px;
-    margin-top: 8px;
+  /* Espacio para el contenido: se agrega padding-top para que no quede tapado por el título y el navbar */
+  .contenido {
+      padding-top: 120px;
   }
 
-  .dropdown-content a {
-    color: white;
-    padding: 10px;
-    display: block;
-    text-decoration: none;
-    font-size: 14px;
-  }
+  /* Responsividad */
+  @media (max-width: 768px) {
+      .navbar-container {
+          flex-direction: column;
+          align-items: flex-start;
+      }
 
-  .dropdown-content a:hover {
-    background-color: #34495e;
+      .menu {
+          flex-direction: column;
+          gap: 15px;
+      }
+
+      .menu-item {
+          flex: none;
+          width: 100%;
+      }
   }
 </style>
