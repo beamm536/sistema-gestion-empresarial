@@ -1,4 +1,8 @@
 <script>
+    import { push } from 'svelte-spa-router';
+    function goHome(){
+    push('/');
+  }
     const departamentos = [
         { id: 1, nombre: "Administración", gerente: "Beatriz", parentId: null },
         { id: 2, nombre: "Recursos Humanos", gerente: "Carlos", parentId: 1 },
@@ -98,6 +102,30 @@
   .contenedor-hijos > .tarjeta {
     flex-grow: 1;
   }
+  .home-btn {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  background-color: #8A7BB7;
+  color: white;
+  border: none;
+  padding: 20px;
+  border-radius: 50%; /* Botón circular */
+  cursor: pointer;
+  z-index: 10000;
+  transition: background-color 0.3s ease;
+}
+
+.home-btn:hover {
+  background-color: #786aa0;
+}
+
+.home-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
 </style>
 
 <div class="contenedor-principal">
@@ -124,3 +152,9 @@
     </div>
   {/each}
 </div>
+
+<button class="home-btn" on:click={goHome} aria-label="Inicio">
+    <svg xmlns="http://www.w3.org/2000/svg" class="home-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+    </svg>
+  </button>

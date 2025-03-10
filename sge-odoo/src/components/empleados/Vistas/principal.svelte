@@ -1,6 +1,10 @@
 <script>
     /*import "../EmpleadosVista.css";*/
     import NuevoEmpleado from "./nuevoEmpleado.svelte";
+    import { push } from 'svelte-spa-router';
+    function goHome(){
+    push('/');
+  }
 
     let empleados = [
         {
@@ -211,6 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </li>
         {/each}
       </ul>
+      
     </div>
   
     <!-- Contenido principal -->
@@ -233,6 +238,12 @@ document.addEventListener("DOMContentLoaded", () => {
           {/each}
         </div>
       </div>
+
+      <button class="home-btn" on:click={goHome} aria-label="Inicio">
+        <svg xmlns="http://www.w3.org/2000/svg" class="home-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+        </svg>
+      </button>
 </div>
 
 
@@ -316,6 +327,8 @@ document.addEventListener("DOMContentLoaded", () => {
         </form>
     </div>
 </div>
+
+
 
 <style>
 /* Reset y configuración global */
@@ -571,7 +584,35 @@ form {
   border-radius: 4px;
   box-sizing: border-box;
 }
+:not(.home-btn) > svg {
+  height: 370px;
+  width: 600px;
+}
 
+
+.home-btn {
+  position: fixed!important;
+  bottom: 50px!important;
+  right: 50px!important;
+  background-color: #8A7BB7!important;
+  color: white!important;
+  border: none!important;
+  padding: 20px!important;
+  border-radius: 50%!important;
+  cursor: pointer!important;
+  z-index: 10000!important;
+  transition: background-color 0.3s ease!important;
+}
+
+.home-btn:hover {
+  background-color: #786aa0!important;
+}
+
+.home-icon {
+  width: 24px!important;
+  height: 24px!important;
+  display: block!important;
+}
 
 /* Responsive */
 @media (max-width: 768px) {
