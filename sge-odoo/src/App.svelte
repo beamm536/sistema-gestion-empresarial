@@ -1,4 +1,9 @@
 <script>
+
+  //importaciones para el enrutamiento
+  import Router from 'svelte-spa-router';
+  import routes from './routes';
+
   import svelteLogo from "./assets/svelte.svg";
   import viteLogo from "/vite.svg";
   import Counter from "./lib/Counter.svelte";
@@ -6,6 +11,7 @@
   import Estructura from "./components/Estructura.svelte";
   import EmpleadosVista from "./components/empleados/EmpleadosVista.svelte";
   import InventarioVista from "./components/inventario/InventarioVista.svelte";
+  import VentasVista from "./components/ventas/ventasVista.svelte";
 
   let vista = "estructura";
 
@@ -14,12 +20,19 @@
     }
 </script>
 
-<div class="app">
-  <!-- <IconoBoton /> -->
-  <!-- <Estructura /> -->
- <!--<EmpleadosVista /> -->
+<div class="app-main">
 
- <InventarioVista/>
+  <Router {routes} />
+  
+   <div class="app-main-estructura">
+     <Estructura />
+   </div>
+<!--  <EmpleadosVista /> -->
+
+ <!--<InventarioVista/>-->
+ <!--<VentasVista/>-->
+
+
 
 
  

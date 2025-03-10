@@ -1,112 +1,139 @@
 <script>
+  import Principal from "../inventario/Vistas/principal.svelte";
+  import AñadirProducto from "../inventario/Vistas/AñadirProductos.svelte";
 
-    import Principal from "../inventario/Vistas/principal.svelte";
-    import AñadirProducto from "../inventario/Vistas/AñadirProductos.svelte"
+  let vistaActual = "principal";
+  let mostrarDropdownProductos = false;
 
-  
-    let vistaActual = "principal";
-    let mostrarDropdownProductos = false; // Controla si se muestra el dropdown de empleados
-  
-    function cambiarVista(vista) {
+  function cambiarVista(vista) {
       vistaActual = vista;
-      mostrarDropdownProductos = false; // Cierra el dropdown de empleados al cambiar de vista
-    }
-  
-    function toogleDropdownProductos() {
-        mostrarDropdownProductos = !mostrarDropdownProductos;
-      // Cierra el otro dropdown si está abierto
-    }
-  
-  </script>
-  
-  <div class="app-empleados">
-    <div class="app">
-      <div class="navbar">
-        <div class="menu">
-          <!--<a href="#" on:click|preventDefault={() => cambiarVista("principal")}>Empleados</a>-->
-            <a href="#" on:click|preventDefault={() => cambiarVista("principal")}
-              >Inventario</a
-            >
-          <!-- Menú desplegable para Departamentos -->
-            <a href="#" on:click|preventDefault={() => cambiarVista("principal")}
-              >Informacion General</a>
-  
-              <div class="dropdown">
-                <a href="#" on:click|preventDefault={toogleDropdownProductos}>Productos</a>
-              
-                {#if mostrarDropdownProductos}
-                  <div class="dropdown-content">
-                    <a href="#" on:click|preventDefault={() => cambiarVista("añadir-producto")}>Ver/añadir Productos</a>
-                  </div>
-                {/if}
-              </div>
-              
+      mostrarDropdownProductos = false; // Cierra el dropdown de productos al cambiar de vista
+  }
 
-        </div>
+  function toogleDropdownProductos() {
+      mostrarDropdownProductos = !mostrarDropdownProductos;
+  }
+</script>
+
+<div class="app-empleados">
+  <div class="app">
+      <!-- Título encima del Navbar -->
+      <div class="titulo">
+          Módulo de Inventario
       </div>
-  
+
+      <nav class="navbar">
+          <div class="navbar-container">
+              <div class="menu">
+                  <div class="menu-item" 
+                       on:click={() => cambiarVista("principal")}
+                       class:selected={vistaActual === "principal"}>
+                      Información General
+                  </div>
+                  <div class="menu-item" 
+                       on:click={() => cambiarVista("añadir-producto")}
+                       class:selected={vistaActual === "añadir-producto"}>
+                      Ver/añadir Productos
+                  </div>
+              </div>
+          </div>
+      </nav>
+
       <!-- Mostrar el componente correspondiente -->
       {#if vistaActual === "principal"}
-      <Principal/>
+          <Principal />
       {:else if vistaActual === "añadir-producto"}
-      <AñadirProducto/>
+          <AñadirProducto />
       {/if}
-    </div>
   </div>
-  
-  <style>
-    .navbar {
-      background-color: #2c3e50;
-      padding: 10px;
+</div>
+
+<style>
+  /* Estilos para el texto encima del Navbar */
+  .titulo {
+      text-align: center;
+      padding: 10px 0;
+      background-color: #8A7BB7; /* Fondo morado */
+      color: white; /* Texto blanco */
+      font-size: 24px;
+      font-weight: 600;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1100;
+  }
+
+  /* Estilos del Navbar */
+  .navbar {
+      padding: 8px 15px;
+      position: fixed;
+      width: 100%;
+      top: 60px; /* Espacio debajo del título */
+      left: 0;
+      z-index: 1000;
+  }
+
+  .navbar-container {
       display: flex;
+      justify-content: center;
       align-items: center;
-    }
-  
-    .menu {
+      width: 100%;
+  }
+
+  .menu {
       display: flex;
-      gap: 15px;
-      align-items: center; /* Alinea verticalmente los elementos del menú */
-    }
-  
-    .menu a {
-      color: white;
-      text-decoration: none;
-      padding: 8px;
-      font-size: 16px;
+      width: 100%;
+      max-width: 1200px;
+      gap: 0;
+  }
+
+  .menu-item {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 8px 12px; /* Reducir padding */
       cursor: pointer;
-    }
-  
-    .menu a:hover {
-      background-color: #34495e;
-      border-radius: 4px;
-    }
-  
-    /* Estilo del dropdown */
-    .dropdown {
-      position: relative;
-      display: inline-block; /* Asegura que el dropdown esté alineado correctamente con los demás enlaces */
-    }
-  
-    .dropdown-content {
-      position: absolute;
-      background-color: #2c3e50;
-      min-width: 180px;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-      z-index: 1;
-      border-radius: 4px;
-      margin-top: 8px;
-    }
-  
-    .dropdown-content a {
+      transition: background-color 0.3s ease, color 0.3s ease;
+      background-color: #d7d6d6;
+      color: #333;
+      font-size: 18px; /* Reducir tamaño de fuente */
+      font-weight: 500;
+      border: #c1c0c0 1px solid;
+  }
+
+  .menu-item.selected {
+      background-color: #8A7BB7;
       color: white;
-      padding: 10px;
-      display: block;
-      text-decoration: none;
-      font-size: 14px;
-    }
-  
-    .dropdown-content a:hover {
-      background-color: #34495e;
-    }
-  </style>
-  
+  }
+
+  .menu-item:hover {
+      background-color: #b9b7b7;
+      color: white;
+  }
+
+  /* Ajustes para asegurar que el contenido no quede oculto detrás del navbar */
+  .app {
+      /*padding-top: 120px;  Da espacio suficiente para el título y el navbar */
+  }
+
+  /* Responsividad */
+  @media (max-width: 768px) {
+      .navbar-container {
+          flex-direction: column;
+          align-items: flex-start;
+      }
+
+      .menu {
+          flex-direction: column;
+          gap: 15px;
+      }
+
+      .menu-item {
+          flex: none;
+          width: 100%;
+      }
+  }
+</style>
