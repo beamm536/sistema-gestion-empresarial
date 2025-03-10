@@ -1,10 +1,11 @@
 <script>
   import { push } from 'svelte-spa-router';
-    function goHome(){
-    push('/');
-  }
   import * as d3 from "d3";
   import { onMount } from "svelte";
+
+  function goHome(){
+    push('/');
+  }
 
   let data_synthetic = [
     { contratos: 5, fecha: "01-03-2024" },
@@ -19,64 +20,101 @@
   });
 
   function buildChart(data) {
-    const svg = d3.select("#bar-chart");
-    const height = 300;
-    const width = 500;
-    const barWidth = 50;
-    const barSpacing = 50;
-    const marginBottom = 70;
-    const marginLeft = 70;
+    // Definir márgenes y dimensiones
+    const margin = { top: 20, right: 30, bottom: 50, left: 50 };
+    const width = 600 - margin.left - margin.right;
+    const height = 370 - margin.top - margin.bottom;
 
-    svg.attr("width", width).attr("height", height + marginBottom);
+    // Seleccionar el SVG y aplicar dimensiones y grupo de trabajo
+    const svg = d3
+      .select("#bar-chart")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    const scaleY = d3
+    // Escala x tipo band para datos categóricos
+    const x = d3
+      .scaleBand()
+      .domain(data.map(d => d.fecha))
+      .range([0, width])
+      .padding(0.2);
+
+    // Escala y lineal
+    const y = d3
       .scaleLinear()
-      .domain([0, d3.max(data, (d) => d.contratos)])
+      .domain([0, d3.max(data, d => d.contratos) + 2])
+      .nice()
       .range([height, 0]);
 
-    let offsetX = marginLeft;
-
+    // Eje x con etiquetas rotadas
     svg
-      .selectAll("rect")
+      .append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(x).tickSizeOuter(0))
+      .selectAll("text")
+      .attr("transform", "rotate(-45)")
+      .style("text-anchor", "end")
+      .style("fill", "#8A8A8A");
+
+    // Eje y
+    svg
+      .append("g")
+      .call(d3.axisLeft(y))
+      .selectAll("text")
+      .style("fill", "#8A8A8A");
+
+    // Rejilla en el eje y para facilitar la lectura
+    svg
+      .append("g")
+      .attr("class", "grid")
+      .call(
+        d3
+          .axisLeft(y)
+          .tickSize(-width)
+          .tickFormat("")
+      );
+
+    // Dibujar barras con transición
+    svg
+      .selectAll(".bar")
       .data(data)
       .enter()
       .append("rect")
-      .attr("x", (d, i) => offsetX + i * (barWidth + barSpacing))
-      .attr("y", (d) => scaleY(d.contratos))
-      .attr("width", barWidth)
-      .attr("height", (d) => height - scaleY(d.contratos))
-      .attr("fill", "steelblue")
-      .append("title")
-      .text((d) => `${d.contratos} contratos`);
+      .attr("class", "bar")
+      .attr("x", d => x(d.fecha))
+      .attr("y", height) // inicia en la parte inferior
+      .attr("width", x.bandwidth())
+      .attr("height", 0)
+      .attr("fill", "#ffb6c1")
+      .on("mouseover", function () {
+        d3.select(this).attr("fill", "#ff91a4");
+      })
+      .on("mouseout", function () {
+        d3.select(this).attr("fill", "#ffb6c1");
+      })
+      .transition()
+      .duration(800)
+      .attr("y", d => y(d.contratos))
+      .attr("height", d => height - y(d.contratos));
 
+    // Añadir etiquetas de valor encima de cada barra
     svg
-      .selectAll("text.value")
-      .data(data)
-      .enter()
-      .append("text")
-      .attr("class", "value")
-      .attr("x", (d, i) => offsetX + i * (barWidth + barSpacing) + barWidth / 2)
-      .attr("y", (d) => scaleY(d.contratos) - 5)
-      .attr("text-anchor", "middle")
-      .attr("fill", "black")
-      .text((d) => d.contratos);
-
-    svg
-      .selectAll("text.label")
+      .selectAll(".label")
       .data(data)
       .enter()
       .append("text")
       .attr("class", "label")
-      .attr("x", (d, i) => offsetX + i * (barWidth + barSpacing) + barWidth / 2)
-      .attr("y", height + 50)
+      .attr("x", d => x(d.fecha) + x.bandwidth() / 2)
+      .attr("y", d => y(d.contratos) - 5)
       .attr("text-anchor", "middle")
-      .attr("fill", "black")
-      .text((d) => d.fecha);
+      .attr("fill", "#8A8A8A")
+      .text(d => d.contratos);
   }
 </script>
 
 <div class="container">
-  <h1>Contratos por Fecha</h1>
+  <h2>Contratos por Fecha</h2>
   <div class="chart-container">
     <svg id="bar-chart"></svg>
   </div>
@@ -89,18 +127,19 @@
 </button>
 
 <style>
-  svg {
-    height: 370px;
-    width: 600px;
-  }
-
   .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-top: 5%;
+    /* Se reduce el margen superior para subir el contenido */
+    margin-top: 2%;
+  }
+
+  h1 {
+    margin-bottom: 20px;
+    color: #8A8A8A;
   }
 
   .chart-container {
@@ -109,28 +148,35 @@
     align-items: center;
     justify-content: center;
   }
+
+  /* Estilo para la rejilla: líneas grises claras */
+  .grid line {
+    stroke: #ddd;
+    stroke-dasharray: 3;
+  }
+
+  /* Botón Home */
   .home-btn {
-  position: fixed;
-  bottom: 50px;
-  right: 50px;
-  background-color: #8A7BB7;
-  color: white;
-  border: none;
-  padding: 20px;
-  border-radius: 50%; /* Botón circular */
-  cursor: pointer;
-  z-index: 10000;
-  transition: background-color 0.3s ease;
-}
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    background-color: #8A7BB7;
+    color: white;
+    border: none;
+    padding: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10000;
+    transition: background-color 0.3s ease;
+  }
 
-.home-btn:hover {
-  background-color: #786aa0;
-}
+  .home-btn:hover {
+    background-color: #786aa0;
+  }
 
-.home-icon {
-  width: 24px;
-  height: 24px;
-  display: block;
-}
-
+  .home-icon {
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
 </style>
