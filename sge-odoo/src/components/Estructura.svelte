@@ -1,62 +1,65 @@
 <script>
-    import IconoBoton from "./IconoBoton.svelte";
-    /* import imgFacturacion from "../../public/imgs/facturacion.png"
-    import imgVentas from "../../public/imgs/ventas.png"
-    import imgContabilidad from "../../public/imgs/contabilidad.png"
-    import imgCRM from "../../public/imgs/crm.png"
-    import imgProyecto from "../../public/imgs/proyecto.png"
-    import imgInformacion from "../../public/imgs/informacion.png"
-    import imgInventario from "../../public/imgs/inventario.png"
-    import imgCompra from "../../public/imgs/compra.png"
-    import imgDocumentos from "../../public/imgs/documentos.png"
-    import imgFabricacion from "../../public/imgs/fabricacion.png" */
-  
-    const imgs = [
-  { img: "/imgs/facturacion.png", label: "Facturacion" },
-  { img: "/imgs/ventas.png", label: "Ventas" },
-  { img: "/imgs/contabilidad.png", label: "Contabilidad" },
-  { img: "/imgs/crm.png", label: "CRM" },
-  { img: "/imgs/proyecto.png", label: "Proyecto" },
-  { img: "/imgs/informacion.png", label: "Informacion" },
-  { img: "/imgs/inventario.png", label: "Inventario" },
-  { img: "/imgs/compra.png", label: "Compra" },
-  { img: "/imgs/documentos.png", label: "Documentos" },
-  { img: "/imgs/fabricacion.png", label: "Fabricacion" }
-];
-  </script>
-  
-  <style>
-    .launcher {
-      position: relative;
-      width: 300px;
-      height: 300px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #fff;
+  import IconoBoton from "./IconoBoton.svelte";
+  import './styles/Estructura.css';
+  import { push, location } from 'svelte-spa-router';
+
+  const imgs = [
+    { img: "/imgs/facturacion.png", label: "Facturacion" },
+    { img: "/imgs/ventas.png", label: "Ventas" },
+    { img: "/imgs/contabilidad.png", label: "Contabilidad" },
+    { img: "/imgs/crm.png", label: "CRM" },
+    { img: "/imgs/proyecto.png", label: "Proyecto" },
+    { img: "/imgs/informacion.png", label: "Informacion" },
+    { img: "/imgs/inventario.png", label: "Inventario" },
+    { img: "/imgs/compra.png", label: "Compra" },
+    { img: "/imgs/documentos.png", label: "Documentos" },
+    { img: "/imgs/empleados.png", label: "Empleados"}
+  ];
+
+  // Solo estos botones estarán habilitados
+  const enabledButtons = ["Empleados", "Ventas", "Inventario"];
+
+  function handleClick(label) {
+    // Si el botón no está habilitado, no se hace nada
+    if (!enabledButtons.includes(label)) return;
+    console.log('Navegando a:', label);
+    if (label === "Empleados") {
+      push('/empleados');
+    } else if (label === "Inventario") {
+      push('/inventario');
+    } else if (label === "Ventas") {
+      push('/ventas');
+    } else {
+      push('/');
     }
-  
-    .icons-container {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-    }
-  
-    .icon-wrapper {
-      position: absolute;
-      transform: translate(-50%, -50%);
-    }
-  </style>
-  
-  <div class="launcher">
-    <div class="icons-container">
-      {#each imgs as { img, label }, i}
-        <div
-          class="icon-wrapper"
-          style="transform: translate(-50%, -50%) rotate({i * (360 / imgs.length)}deg) translate(200px) rotate(-{i * (360 / imgs.length)}deg);"
-        >
-          <IconoBoton {img} {label} />
+  }
+
+  // Se utiliza el store location para determinar la ruta actual
+  $: isHome = $location === "/";
+</script>
+
+<!-- Se asigna la clase 'home-background' solo si estamos en "/" y 'white-background' en caso contrario -->
+<div class="contenedor-estructura {isHome ? 'home-background' : 'white-background'}">
+  <header class="main-header">
+    <h1>SmartOps</h1>
+    <p>Bienvenido a la prueba de nuestro software nuevo de gestión empresarial</p>
+  </header>
+
+  <div class="launcher-vistaPrincipal">
+    <div class="oval-container">
+      {#each imgs as { img, label }}
+        <!-- Se asigna la clase "disabled" si el botón no está en la lista de habilitados -->
+        <div class="icon-wrapper {enabledButtons.includes(label) ? '' : 'disabled'}">
+          <!-- Se ejecuta el handleClick solo si el botón está habilitado -->
+          <div on:click={() => enabledButtons.includes(label) && handleClick(label)} style="cursor: pointer;">
+            <IconoBoton {img} {label} enabled={enabledButtons.includes(label)} />
+          </div>
         </div>
       {/each}
     </div>
   </div>
+
+  <footer class="main-footer">
+    <p>&copy; 2025 Mi Aplicación</p>
+  </footer>
+</div>

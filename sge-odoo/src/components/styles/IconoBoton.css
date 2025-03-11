@@ -1,0 +1,30 @@
+.icon-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: white;
+  color: black;
+  border: 3px solid #8A7BB7;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, background 0.2s, color 0.2s;
+}
+
+/* Se reduce el tamaño del texto dentro del botón */
+.icon-button span {
+  font-size: 12px;
+}
+
+.icon-button:hover {
+  transform: scale(1.1);
+  background: #8A7BB7;
+  color: white;
+}
+
+.icon {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
